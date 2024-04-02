@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model administradores {
+  id            Int    @id @default(autoincrement())
+  correo        String @unique
+  contrasenia   String @db.VarChar(100)
+  id_invitacion Int    @unique
+
+  invitacion invitaciones @relation(fields: [id_invitacion], references: [id])
+}
+
+model invitaciones {
+  id                Int              @id @default(autoincrement())
+  codigo_invitacion String           @db.VarChar(100)
+  usado             Boolean          @default(false)
+  administradores   administradores?
+}
+
+model vehiculos {
+  id             Int      @id @default(autoincrement())
+  placa          String   @unique
+  marca          String   @db.VarChar(300)
+  modelo         String   @db.VarChar(300)
+  VIN            String   @unique @db.VarChar(300)
+  fecha_compra   DateTime @db.Date()
+  costo          Int
+  url_foto       String   @db.VarChar(300)
+  fecha_registro DateTime @default(now())
+}
+
+model conductores {
+  id                Int      @id @default(autoincrement())
+  CURP              String   @unique @db.VarChar(70)
+  nombres           String   @db.VarChar(300)
+  apellido_parterno String   @db.VarChar(300)
+  apellido_marterno String   @db.VarChar(300)
+  fecha_nacimiento  DateTime @db.Date()
+  direccion         String   @db.VarChar(400)
+  salario           Int
+  numero_licencia   Int      @unique
+  fecha_registro    DateTime @default(now())
+}
+
+model asignaciones {
+  id                  Int      @id @default(autoincrement())
+  id_conductor        Int
+  id_vehiculo         Int
+  fecha_asignacion    DateTime @default(now())
+  fecha_desasignacion DateTime @db.Date()
+  rutas               rutas[]
+}
+
+model rutas {
+  id                   Int      @id @default(autoincrement())
+  nombre_ruta          String   @db.VarChar(120)
+  long_empresa         String   @db.VarChar(200)
+  lat_empresa          String   @db.VarChar(200)
+  long_destino         String   @db.VarChar(200)
+  lat_destino          String   @db.VarChar(200)
+  fecha_recorrido      DateTime
+  fecha_creacion       DateTime @default(now())
+  exitoso              Boolean
+  descripcion_problema String   @db.Text()
+  comentarios          String   @db.Text()
+  id_asignacion        Int
+
+  asignacion asignaciones @relation(fields: [id_asignacion], references: [id])
+}
