@@ -19,20 +19,22 @@ export class RutasModelo {
         id_asignacion: number;        
     }) {
 
+        //cada vehiculo solo puede recorrer la ruta una vez al día
         const rutaAsignada = await prisma.rutas.findFirst({
             where: {
-              id: datosRutas.id,
+              id_asignacion: datosRutas.id_asignacion,
               fecha_recorrido: datosRutas.fecha_recorrido,
             },
           });
       
           if (rutaAsignada) {
-            throw new Error('La ruta ya esta asignada a un conductor');
+            throw new Error('El vehiculo ya recorrió esta ruta');
           }
       
         
     
         // Si pasa las validaciones se crea la ruta
+
         return await prisma.rutas.create({
             data: {
                 nombre_ruta: datosRutas.nombre_ruta,
@@ -75,17 +77,17 @@ export class RutasModelo {
         id?: number;
         id_asignacion?: number;     
     }) {
-        // Validación para el curp que tiene que ser único 
-        if (datosRutas.id) {
+        // Validación para que cada vehiculo recorra la ruta una vez al día
+        if (datosRutas.id_asignacion) {
             const rutaAsignada = await prisma.rutas.findFirst({
                 where: {
-                  id: datosRutas.id,
+                    id_asignacion: datosRutas.id_asignacion,
                   fecha_recorrido: datosRutas.fecha_recorrido,
                 },
               });
           
               if (rutaAsignada) {
-                throw new Error('La ruta ya esta asignada a un conductor');
+                throw new Error('El vehiculo ya recorrió esta ruta');
               }
         }
     
