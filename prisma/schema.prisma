@@ -24,37 +24,55 @@ model invitaciones {
 }
 
 model vehiculos {
-  id             Int      @id @default(autoincrement())
-  placa          String   @unique
-  marca          String   @db.VarChar(300)
-  modelo         String   @db.VarChar(300)
-  VIN            String   @unique @db.VarChar(300)
-  fecha_compra   DateTime @db.Date()
-  costo          Int
-  url_foto       String   @db.VarChar(300)
-  fecha_registro DateTime @default(now())
+  id                     Int                      @id @default(autoincrement())
+  placa                  String                   @unique
+  marca                  String                   @db.VarChar(300)
+  modelo                 String                   @db.VarChar(300)
+  VIN                    String                   @unique @db.VarChar(300)
+  fecha_compra           DateTime                 @db.Date()
+  costo                  Int
+  url_foto               String                   @db.VarChar(300)
+  fecha_registro         DateTime                 @default(now())
+  asignaciones           asignaciones[]
+  historial_asignaciones historial_asignaciones[]
 }
 
 model conductores {
-  id                Int      @id @default(autoincrement())
-  CURP              String   @unique @db.VarChar(70)
-  nombres           String   @db.VarChar(300)
-  apellido_parterno String   @db.VarChar(300)
-  apellido_marterno String   @db.VarChar(300)
-  fecha_nacimiento  DateTime @db.Date()
-  direccion         String   @db.VarChar(400)
-  salario           Int
-  numero_licencia   Int      @unique
-  fecha_registro    DateTime @default(now())
+  id                     Int                      @id @default(autoincrement())
+  CURP                   String                   @unique @db.VarChar(70)
+  nombres                String                   @db.VarChar(300)
+  apellido_paterno       String                   @db.VarChar(300)
+  apellido_materno       String                   @db.VarChar(300)
+  fecha_nacimiento       DateTime                 @db.Date()
+  direccion              String                   @db.VarChar(400)
+  salario                Int
+  numero_licencia        Int                      @unique
+  fecha_registro         DateTime                 @default(now())
+  asignaciones           asignaciones[]
+  historial_asignaciones historial_asignaciones[]
 }
 
 model asignaciones {
-  id                  Int      @id @default(autoincrement())
-  id_conductor        Int
-  id_vehiculo         Int
-  fecha_asignacion    DateTime @default(now())
-  fecha_desasignacion DateTime @db.Date()
-  rutas               rutas[]
+  id           Int @id @default(autoincrement())
+  id_conductor Int
+  id_vehiculo  Int
+
+  activo Boolean @default(true)
+  rutas  rutas[]
+
+  conductor conductores @relation(fields: [id_conductor], references: [id])
+  vehiculo  vehiculos   @relation(fields: [id_vehiculo], references: [id])
+}
+
+model historial_asignaciones {
+  id                 Int      @id @default(autoincrement())
+  id_asignacion      Int
+  id_conductor       Int
+  id_vehiculo        Int
+  fecha_modificacion DateTime @default(now())
+
+  conductor conductores @relation(fields: [id_conductor], references: [id])
+  vehiculo  vehiculos   @relation(fields: [id_vehiculo], references: [id])
 }
 
 model rutas {
