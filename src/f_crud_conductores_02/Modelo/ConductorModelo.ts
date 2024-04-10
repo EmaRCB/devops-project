@@ -37,8 +37,8 @@ export class ConductorModelo {
             data: {
                 CURP: datosConductor.CURP,
                 nombres: datosConductor.nombres,
-                apellido_parterno: datosConductor.apellidoPaterno,
-                apellido_marterno: datosConductor.apellidoMaterno,
+                apellido_paterno: datosConductor.apellidoPaterno,
+                apellido_materno: datosConductor.apellidoMaterno,
                 fecha_nacimiento: new Date(datosConductor.fechaNacimiento),
                 direccion: datosConductor.direccion,
                 salario: datosConductor.salario,
@@ -104,8 +104,8 @@ export class ConductorModelo {
             data: {
                 CURP: datosConductor.CURP,
                 nombres: datosConductor.nombres,
-                apellido_parterno: datosConductor.apellidoPaterno, 
-                apellido_marterno: datosConductor.apellidoMaterno,
+                apellido_paterno: datosConductor.apellidoPaterno,
+                apellido_materno: datosConductor.apellidoMaterno,
                 fecha_nacimiento: datosConductor.fechaNacimiento ? new Date(datosConductor.fechaNacimiento) : undefined, 
                 direccion: datosConductor.direccion,
                 salario: datosConductor.salario,
