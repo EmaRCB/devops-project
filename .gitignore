@@ -98,9 +98,6 @@ dist
 # Gatsby files
 .cache/
 
-#migrations
-/prisma/
-
 # vuepress build output
 .vuepress/dist
 
