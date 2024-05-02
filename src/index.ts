@@ -7,5 +7,3 @@ app.listen(EnvLoad.PORT, async () => {
   console.info(`Server running on http://localhost:${EnvLoad.PORT}`);
   client;
 });
-
-app.use('/vehiculos', vehiculosRouter);

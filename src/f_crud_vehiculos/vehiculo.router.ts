@@ -11,4 +11,4 @@ router.post('/', vehiculosControllerInstance.createVehiculo);
 router.put('/:id', vehiculosControllerInstance.updateVehiculo);
 router.delete('/:id', vehiculosControllerInstance.deleteVehiculo)
 
-module.exports = router;
+export default router;
