@@ -1,5 +1,4 @@
 import {PrismaClient} from '@prisma/client';
-import {any} from "zod";
 
 let prismaInstance: PrismaClient | null = null;
 export class VehiculoService {
