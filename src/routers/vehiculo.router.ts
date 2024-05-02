@@ -1,4 +1,4 @@
-import {vehiculoController} from "./vehiculo.controller";
+import {vehiculoController} from "../controllers/vehiculo.controller";
 const express = require('express');
 const router = express.Router();
 const cors = require('cors');

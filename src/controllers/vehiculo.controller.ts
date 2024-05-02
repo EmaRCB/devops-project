@@ -1,4 +1,4 @@
-import {VehiculoService} from "./vehiculo.service";
+import {VehiculoService} from "../services/vehiculo.service";
 
 let vehiculoService:VehiculoService;
 export class vehiculoController {
