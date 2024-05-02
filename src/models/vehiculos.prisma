@@ -1,0 +1,13 @@
+model vehiculos {
+  id                     Int                      @id @default(autoincrement())
+  placa                  String                   @unique
+  marca                  String                   @db.VarChar(300)
+  modelo                 String                   @db.VarChar(300)
+  VIN                    String                   @unique @db.VarChar(300)
+  fecha_compra           DateTime                 @db.Date()
+  costo                  Int
+  url_foto               String                   @db.VarChar(300)
+  fecha_registro         DateTime                 @default(now())
+  asignaciones           asignaciones[]
+  historial_asignaciones historial_asignaciones[]
+}

@@ -1,0 +1,10 @@
+model historial_asignaciones {
+  id                 Int      @id @default(autoincrement())
+  id_asignacion      Int
+  id_conductor       Int
+  id_vehiculo        Int
+  fecha_modificacion DateTime @default(now())
+
+  conductor conductores @relation(fields: [id_conductor], references: [id])
+  vehiculo  vehiculos   @relation(fields: [id_vehiculo], references: [id])
+}

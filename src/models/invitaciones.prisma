@@ -1,0 +1,6 @@
+model invitaciones {
+  id                Int              @id @default(autoincrement())
+  codigo_invitacion String           @db.VarChar(100)
+  usado             Boolean          @default(false)
+  administradores   administradores?
+}

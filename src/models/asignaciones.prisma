@@ -1,0 +1,11 @@
+model asignaciones {
+  id           Int @id @default(autoincrement())
+  id_conductor Int
+  id_vehiculo  Int
+
+  activo Boolean @default(true)
+  rutas  rutas[]
+
+  conductor conductores @relation(fields: [id_conductor], references: [id])
+  vehiculo  vehiculos   @relation(fields: [id_vehiculo], references: [id])
+}

@@ -1,0 +1,8 @@
+model administradores {
+  id            Int    @id @default(autoincrement())
+  correo        String @unique
+  contrasenia   String @db.VarChar(100)
+  id_invitacion Int    @unique
+
+  invitacion invitaciones @relation(fields: [id_invitacion], references: [id])
+}
