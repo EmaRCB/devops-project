@@ -1,9 +1,5 @@
-import { client } from "../../util/database_client";
-import {
-  ConflictoDatos,
-  DatosInvalidos,
-  ServidorError,
-} from "../../util/errores";
+import { client } from "../util/database_client";
+import { ConflictoDatos, ServidorError, DatosInvalidos } from "../util/errores";
 
 export type CrearAsignacion = {
   idConductor: number;

@@ -1,15 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import {
-  asignacionesModelo,
   AsignacionesModelo,
   CrearAsignacion,
   DatosAsignacion,
-} from "../modelo/asignaciones";
-import { DatosInvalidos } from "../../util/errores";
+  asignacionesModelo,
+} from "../services/asignaciones.service";
 import {
-  historialAsignacionesModelo,
   HistorialAsignacionesModelo,
-} from "../modelo/asignaciones_historia";
+  historialAsignacionesModelo,
+} from "../services/historial.service";
 
 export class ControladorAsignaciones {
   constructor(
