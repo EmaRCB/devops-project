@@ -4,9 +4,11 @@ import { EnvLoad } from "./env_load";
 class JWT {
   public async DecodeToken<I>(token: string): Promise<I | null> {
     try {
-      const decode = verify(token, EnvLoad.SECRET) as I;
+      const splited = token.split(" ");
+      const decode = verify(splited[1], EnvLoad.SECRET) as I;
       return decode;
     } catch (error) {
+      console.log(error);
       return null;
     }
   }

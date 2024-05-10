@@ -2,7 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import { ConflictoDatos, TokenError } from "../errores";
 import jwt from "../jwt";
 
-type DecodedToken = {};
+type DecodedToken = {
+  data: number;
+};
 
 export const TokenValidador = async (
   req: Request,

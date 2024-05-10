@@ -243,7 +243,7 @@ async function ObtenerAdministradores(req: any, res: any) {
   }
 }
 
-async function Login(req: Request, res: Response, next: NextFunction) {
+export async function Login(req: Request, res: Response, next: NextFunction) {
   try {
     const datos: LoginDatos = req.body as LoginDatos;
     const result = await adminService.ConfirmarCuenta(datos);
@@ -293,5 +293,4 @@ export {
   ActualizarAdministrador,
   ObtenerAdministrador,
   ObtenerAdministradores,
-  Login,
 };

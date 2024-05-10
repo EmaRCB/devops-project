@@ -29,7 +29,7 @@ export class ConflictoDatos extends ErrorPersonalizado implements Error {
 export class TokenError extends ErrorPersonalizado implements Error {
   name: string = "Conflictos en los datos";
   message: string;
-  code: number = 409;
+  code: number = 401;
 
   constructor(message: string) {
     super();
