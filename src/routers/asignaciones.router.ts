@@ -5,9 +5,11 @@ import { ValidadorEsquemas } from "../util/midlewares/validador-esquemas";
 import { BorrarAsignacionEsquema } from "../util/esquemas/borrar-asignacion";
 import { ObtenerAsignacionesEsquema } from "../util/esquemas/obtener-asignaciones";
 import { ActualizarAsignacionEsquema } from "../util/esquemas/actualizar-asignacion";
+import { TokenValidador } from "../util/midlewares/token-validador";
 
 export const asisgnacionesRouter = Router();
 
+asisgnacionesRouter.use(TokenValidador);
 asisgnacionesRouter.post(
   "/crear",
   ValidadorEsquemas(CrearAsignacionEsquema),
