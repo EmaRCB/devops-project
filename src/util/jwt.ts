@@ -18,5 +18,5 @@ class JWT {
   }
 }
 
-const token = new JWT();
-export default token;
+const jwt = new JWT();
+export default jwt;

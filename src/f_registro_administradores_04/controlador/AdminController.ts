@@ -1,5 +1,11 @@
+import { NextFunction, Request, Response } from "express";
 import { client } from "../../util/database_client";
 import nodemailer from "nodemailer";
+import {
+  adminService,
+  LoginDatos,
+} from "../../services/administradores.service";
+import jwt from "../../util/jwt";
 require("dotenv").config();
 
 //Esto solo lo hice para mandar el JSON como lo especificaron en el Trello
@@ -237,6 +243,22 @@ async function ObtenerAdministradores(req: any, res: any) {
   }
 }
 
+async function Login(req: Request, res: Response, next: NextFunction) {
+  try {
+    const datos: LoginDatos = req.body as LoginDatos;
+    const result = await adminService.ConfirmarCuenta(datos);
+    const token = await jwt.GenerateToken({ data: result });
+
+    res.send({
+      code: 200,
+      message: "Login satisfactorio",
+      data: { access: token },
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 async function ObtenerAdministrador(req: any, res: any) {
   try {
     const { id } = req.params;
@@ -271,4 +293,5 @@ export {
   ActualizarAdministrador,
   ObtenerAdministrador,
   ObtenerAdministradores,
+  Login,
 };
