@@ -6,7 +6,8 @@
   "scripts": {
     "migrate": "npx prisma migrate dev --name init",
     "dev": "nodemon",
-    "create-schema.prisma": "cd .\\prisma && del schema.prisma && type config.prisma >> schema.prisma && type ..\\src\\models\\*.prisma >> schema.prisma && prisma format"
+    "create-schema.prisma": "cd .\\prisma && del schema.prisma && type config.prisma >> schema.prisma && type ..\\src\\models\\*.prisma >> schema.prisma && prisma format",
+    "schema-linux": "cd prisma && rm schema.prisma && cat config.prisma >> schema.prisma && cat ../src/models/*.prisma >> schema.prisma && prisma format"
   },
   "keywords": [],
   "author": "",
