@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { controladorAsignaciones } from "../controlador/controlador-asignaciones";
-import { CrearAsignacionEsquema } from "../../util/esquemas/crear-asignacion";
-import { ValidadorEsquemas } from "../../util/midlewares/validador-esquemas";
-import { BorrarAsignacionEsquema } from "../../util/esquemas/borrar-asignacion";
-import { ObtenerAsignacionesEsquema } from "../../util/esquemas/obtener-asignaciones";
-import { ActualizarAsignacionEsquema } from "../../util/esquemas/actualizar-asignacion";
+import { controladorAsignaciones } from "../controllers/asignaciones.controller";
+import { CrearAsignacionEsquema } from "../util/esquemas/crear-asignacion";
+import { ValidadorEsquemas } from "../util/midlewares/validador-esquemas";
+import { BorrarAsignacionEsquema } from "../util/esquemas/borrar-asignacion";
+import { ObtenerAsignacionesEsquema } from "../util/esquemas/obtener-asignaciones";
+import { ActualizarAsignacionEsquema } from "../util/esquemas/actualizar-asignacion";
 
 export const asisgnacionesRouter = Router();
 
