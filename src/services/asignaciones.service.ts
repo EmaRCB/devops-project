@@ -1,4 +1,4 @@
-import { client } from "../util/database_client";
+import client from "../util/database_client";
 import { ConflictoDatos, ServidorError, DatosInvalidos } from "../util/errores";
 
 export type CrearAsignacion = {
