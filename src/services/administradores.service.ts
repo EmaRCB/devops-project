@@ -2,14 +2,14 @@ import { client } from "../util/database_client";
 import { ConflictoDatos } from "../util/errores";
 
 export type LoginDatos = {
-  email: string;
+  correo: string;
   contrasenia: string;
 };
 
 class AdministradoresService {
   async ConfirmarCuenta(data: LoginDatos) {
     const admin = await client.administradores.findFirst({
-      where: { contrasenia: data.contrasenia, correo: data.email },
+      where: { contrasenia: data.contrasenia, correo: data.correo },
       select: { id: true },
     });
 
