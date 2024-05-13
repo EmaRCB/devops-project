@@ -7,12 +7,12 @@ export class vehiculoController {
     constructor() {
         vehiculoService = new VehiculoService();
     }
-    async getVehiculos(res:any, next:any){
+    async getVehiculos(req:any, res:any, next:any){
         try {
             let vehiculos = await vehiculoService.getAll();
             res.status(200).json({status: 200, data: vehiculos, message: 'vehiculos encontrados'});
         }catch (error){
-            next(error);
+            next(error)
         }
     }
 
