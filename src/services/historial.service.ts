@@ -1,4 +1,4 @@
-import { client } from "../util/database_client";
+import client from "../util/database_client";
 import { DatosInvalidos } from "../util/errores";
 import { DatosAsignacion } from "./asignaciones.service";
 
