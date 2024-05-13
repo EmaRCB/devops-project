@@ -1,8 +1,7 @@
 export class VehiculoExcepciones extends Error {
     public statusCode!: number;
-    constructor(message: string, statusCode:number) {
+    constructor(message: string) {
         super(message);
-        this.statusCode = statusCode;
     }
 
     getStatusCode(){
@@ -14,8 +13,16 @@ export class VehiculoExcepciones extends Error {
     }
 }
 
-export class PlacaDuplicada extends VehiculoExcepciones{
-    constructor(message:string, statusCode:number) {
-        super(message, statusCode);
+export class valorDuplicado extends VehiculoExcepciones{
+    statusCode = 400;
+    constructor(message:string) {
+        super(message);
+    }
+}
+
+export class idNotFound extends VehiculoExcepciones{
+    statusCode = 404;
+    constructor(message:string) {
+        super(message);
     }
 }
