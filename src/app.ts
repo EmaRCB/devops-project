@@ -1,13 +1,11 @@
 import Express from "express";
 import cors from "cors";
 import RutasVista from "./f_crud_rutas/vista/RutasVista";
-
 import { ManejadorError } from "./util/midlewares/manejador-error";
 import { asisgnacionesRouter } from "./routers/asignaciones.router";
 import ConductorVista from "./routers/conductor.router";
 import vehiculosRouter from "./routers/vehiculo.router";
-import {manejadorExcepcionesVehiculo} from "./util/midlewares/manejador-excepciones-vehiculo";
-const adminRutas = require("./f_registro_administradores_04/vista/AdminRutas");
+import { manejadorExcepcionesVehiculo } from "./util/midlewares/manejador-excepciones-vehiculo";
 import loginRouter from "./routers/login.router";
 import adminRouter from "./routers/admin.router";
 import registerRouter from "./routers/register.router";
