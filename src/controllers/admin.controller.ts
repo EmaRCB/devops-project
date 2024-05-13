@@ -1,11 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { client } from "../../util/database_client";
+import client from "../util/database_client";
 import nodemailer from "nodemailer";
-import {
-  adminService,
-  LoginDatos,
-} from "../../services/administradores.service";
-import jwt from "../../util/jwt";
+import { adminService, LoginDatos } from "../services/administradores.service";
+import jwt from "../util/jwt";
 require("dotenv").config();
 
 //Esto solo lo hice para mandar el JSON como lo especificaron en el Trello

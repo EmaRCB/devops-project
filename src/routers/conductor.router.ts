@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { ConductorControlador } from "../Controlador/ConductorControlador";
-import { TokenValidador } from "../../util/midlewares/token-validador";
+import { ConductorControlador } from "../controllers/conductor.controller";
+import { TokenValidador } from "../util/midlewares/token-validador";
 
 const router = Router();
 const controlador = new ConductorControlador();
