@@ -12,6 +12,7 @@ export class ConductorModelo {
         salario: number;
         numeroLicencia: number;
     }) {
+
         // Validación para el curp que tiene que ser único
         const curpExistente = await prisma.conductores.findUnique({
             where: {
@@ -21,7 +22,7 @@ export class ConductorModelo {
         if (curpExistente) {
             throw new Error('El CURP ya está registrado.');
         }
-    
+
         // Validación para la licencia que también tiene que ser única
         const licenciaExistente = await prisma.conductores.findUnique({
             where: {
@@ -31,7 +32,7 @@ export class ConductorModelo {
         if (licenciaExistente) {
             throw new Error('El número de licencia ya está registrado.');
         }
-    
+
         // Si pasa las validaciones se crea el conductor
         return await prisma.conductores.create({
             data: {
@@ -50,6 +51,12 @@ export class ConductorModelo {
 
     async obtenerConductores() {
         return await prisma.conductores.findMany();
+    }
+
+    async eliminarConductor(id: number) {
+        return await prisma.conductores.delete({
+            where: { id },
+        });
     }
 
     async obtenerConductorPorId(id: number) {
@@ -82,7 +89,7 @@ export class ConductorModelo {
                 throw new Error('El CURP proporcionado ya está registrado para otro conductor.');
             }
         }
-    
+
         // Validación para la licencia que también tiene que ser única
         if (datosConductor.numeroLicencia) {
             const licenciaExistente = await prisma.conductores.findFirst({
@@ -97,7 +104,7 @@ export class ConductorModelo {
                 throw new Error('El número de licencia proporcionado ya está registrado para otro conductor.');
             }
         }
-    
+
         // Si pasa las validaciones, actualizar el conductor
         return await prisma.conductores.update({
             where: { id },
@@ -106,7 +113,7 @@ export class ConductorModelo {
                 nombres: datosConductor.nombres,
                 apellido_paterno: datosConductor.apellidoPaterno,
                 apellido_materno: datosConductor.apellidoMaterno,
-                fecha_nacimiento: datosConductor.fechaNacimiento ? new Date(datosConductor.fechaNacimiento) : undefined, 
+                fecha_nacimiento: datosConductor.fechaNacimiento ? new Date(datosConductor.fechaNacimiento) : undefined,
                 direccion: datosConductor.direccion,
                 salario: datosConductor.salario,
                 numero_licencia: datosConductor.numeroLicencia,
@@ -114,9 +121,5 @@ export class ConductorModelo {
         });
     }
 
-    async eliminarConductor(id: number) {
-        return await prisma.conductores.delete({
-            where: { id },
-        });
-    }
+
 }

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ConductorModelo } from '../Modelo/ConductorModelo';
+import { ConductorModelo } from '../models/ConductorModelo';
 
 
 export class ConductorControlador {
