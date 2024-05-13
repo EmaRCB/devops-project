@@ -41,7 +41,7 @@ export class vehiculoController {
                 throw new valorDuplicado('El VIN esta duplicado');
             }
             let vehiculo = await vehiculoService.createVehiculo(req.body.placa, req.body.marca,
-                req.body.modelo, req.body.VIN, fecha_compra, req.body.costo, req.body.url_foto);
+                req.body.modelo, req.body.VIN, fecha_compra, parseInt(req.body.costo), req.body.url_foto);
             res.status(200).json({status: 200, data: vehiculo, message: 'vehiculo creado'});
         }catch (error){
             next(error);
@@ -54,14 +54,6 @@ export class vehiculoController {
             let vehiculo = await vehiculoService.getOne(id);
             if(vehiculo === null){
                 throw new idNotFound('El id no existe')
-            }
-            let placaExiste = await vehiculoService.findPlaca(req.body.placa);
-            if(placaExiste){
-                throw new valorDuplicado('La placa esta duplicada');
-            }
-            let vinExiste = await vehiculoService.findVIN(req.body.VIN);
-            if(vinExiste){
-                throw new valorDuplicado('El VIN esta duplicado');
             }
             vehiculo = await vehiculoService.updateVehiculos(id, req.body.placa, req.body.marca,
                 req.body.modelo, req.body.VIN, req.body.costo, req.body.url_foto);
