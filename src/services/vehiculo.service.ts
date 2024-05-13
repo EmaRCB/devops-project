@@ -62,4 +62,20 @@ export class VehiculoService {
             }
         })
     }
+
+    async findPlaca(placa: string){
+        return this.prisma.vehiculos.findUnique({
+            where:{
+                placa:placa
+            }
+        })
+    }
+
+    async findVIN(vin: string){
+        return this.prisma.vehiculos.findUnique({
+            where:{
+                VIN:vin
+            }
+        })
+    }
 }

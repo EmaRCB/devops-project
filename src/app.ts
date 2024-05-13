@@ -6,10 +6,11 @@ import { ManejadorError } from "./util/midlewares/manejador-error";
 import { asisgnacionesRouter } from "./routers/asignaciones.router";
 import ConductorVista from "./routers/conductor.router";
 import vehiculosRouter from "./routers/vehiculo.router";
+import {manejadorExcepcionesVehiculo} from "./util/midlewares/manejador-excepciones-vehiculo";
+const adminRutas = require("./f_registro_administradores_04/vista/AdminRutas");
 import loginRouter from "./routers/login.router";
 import adminRouter from "./routers/admin.router";
 import registerRouter from "./routers/register.router";
-
 
 export const app = Express();
 
@@ -24,4 +25,5 @@ app.use("/admin", adminRouter);
 app.use("/conductores", ConductorVista);
 app.use("/asignaciones", asisgnacionesRouter);
 app.use("/vehiculos", vehiculosRouter);
+app.use(manejadorExcepcionesVehiculo);
 app.use(ManejadorError);
