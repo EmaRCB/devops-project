@@ -1,4 +1,4 @@
-import { client } from "../util/database_client";
+import client from "../util/database_client";
 import { ConflictoDatos } from "../util/errores";
 
 export type LoginDatos = {
