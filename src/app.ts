@@ -1,6 +1,6 @@
 import Express from "express";
 import cors from "cors";
-import RutasVista from "./f_crud_rutas/vista/RutasVista";
+import rutasRouter from "./routers/rutas.router";
 import { ManejadorError } from "./util/midlewares/manejador-error";
 import { asisgnacionesRouter } from "./routers/asignaciones.router";
 import ConductorVista from "./routers/conductor.router";
@@ -18,7 +18,7 @@ app.use(cors());
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
-app.use("/rutas", RutasVista);
+app.use("/rutas", rutasRouter);
 app.use("/admin", adminRouter);
 app.use("/conductores", ConductorVista);
 app.use("/asignaciones", asisgnacionesRouter);

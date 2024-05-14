@@ -7,7 +7,7 @@ const rutasRouter = express.Router();
 const rutasControllerInstance = new RutasController();
 
 rutasRouter.use(TokenValidador);
-rutasRouter.get("/", rutasControllerInstance);
+rutasRouter.get("/", rutasControllerInstance.getRutas);
 rutasRouter.get("/:id", rutasControllerInstance.getRuta);
 rutasRouter.post("/", rutasControllerInstance.createRuta);
 rutasRouter.put("/:id", rutasControllerInstance.updateRuta);
