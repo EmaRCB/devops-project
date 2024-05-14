@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expone el puerto 3000
-EXPOSE 3000
+EXPOSE 3301
 
 # Comando para iniciar la aplicación cuando se ejecute el contenedor
 CMD ["node", "app.ts"]
