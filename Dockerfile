@@ -1,8 +1,8 @@
 # Utiliza la imagen oficial de Node.js como base
 FROM node:21.7-alpine3.18
 
-# Establece el directorio de trabajo en /app
-WORKDIR /app
+# Establece el directorio de trabajo en /src
+WORKDIR /src
 
 # Copia los archivos necesarios al contenedor
 COPY package*.json ./
