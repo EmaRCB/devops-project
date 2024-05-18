@@ -6,11 +6,6 @@ pipeline {
     }
     
     stages {
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t segunda-entrega-\$BRANCH_NAME_CLEANED:1.0.0-\$BUILD_NUMBER ."
