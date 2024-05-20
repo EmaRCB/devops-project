@@ -12,9 +12,7 @@ docker run --name kibana --net elastic-network -p 5601:5601 -e xpack.security.en
 
 docker run --name elastic --net elastic-network -p 9200:9200 -e discovery.type=single-node -e ES_JAVA_OPTS="-Xms1g -Xmx1g" -e xpack.security.enabled=false -d  elasticsearch:8.7.0
 
-
-
-
+docker network inspect elastic-network
 
 # Checar elastic 
 # http://localhost:9200/

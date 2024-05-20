@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                sh 'docker run -d --network=elastic-network --name segunda-entrega-\$BRANCH_NAME_CLEANED-\$BUILD_NUMBER segunda-entrega-\$BRANCH_NAME_CLEANED:1.0.0-\$BUILD_NUMBER'
+                sh 'docker run -d --network=elastic-network -p 3301:3301 --name segunda-entrega-\$BRANCH_NAME_CLEANED-\$BUILD_NUMBER segunda-entrega-\$BRANCH_NAME_CLEANED:1.0.0-\$BUILD_NUMBER'
             }
         }
     }
