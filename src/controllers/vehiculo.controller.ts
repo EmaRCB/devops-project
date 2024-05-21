@@ -5,7 +5,6 @@ export class vehiculoController {
     constructor(private readonly vehiculoService: VehiculoService) {}
 
     //Se llama al servicio una vez
-    //Se llama al metodo json una vez
     //El parametro data al enviarse como respuesta contiene solamente la informacion que regreso la llamada al servicio
     //Se tira un error si el servicio falla
     //Cuando se llama al metodo json solamente se le envian 3 parametros
