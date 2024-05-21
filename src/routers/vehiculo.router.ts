@@ -1,16 +1,18 @@
 import { vehiculoController } from "../controllers/vehiculo.controller";
 import { TokenValidador } from "../util/midlewares/token-validador";
+import {VehiculoService} from "../services/vehiculo.service";
 const express = require("express");
 const vehiculosRouter = express.Router();
 const cors = require("cors");
-const vehiculosControllerInstance = new vehiculoController();
+let vehiculoService = new VehiculoService();
+const vehiculosControllerInstance = new vehiculoController(vehiculoService);
 
 vehiculosRouter.use(cors());
 vehiculosRouter.use(TokenValidador);
-vehiculosRouter.get("/", vehiculosControllerInstance.getVehiculos);
-vehiculosRouter.get("/:id", vehiculosControllerInstance.getVehiculo);
-vehiculosRouter.post("/", vehiculosControllerInstance.createVehiculo);
-vehiculosRouter.put("/:id", vehiculosControllerInstance.updateVehiculo);
-vehiculosRouter.delete("/:id", vehiculosControllerInstance.deleteVehiculo);
+vehiculosRouter.get("/", vehiculosControllerInstance.getVehiculos.bind(vehiculosControllerInstance));
+vehiculosRouter.get("/:id", vehiculosControllerInstance.getVehiculo.bind(vehiculosControllerInstance));
+vehiculosRouter.post("/", vehiculosControllerInstance.createVehiculo.bind(vehiculosControllerInstance));
+vehiculosRouter.put("/:id", vehiculosControllerInstance.updateVehiculo.bind(vehiculosControllerInstance));
+vehiculosRouter.delete("/:id", vehiculosControllerInstance.deleteVehiculo.bind(vehiculosControllerInstance));
 
 export default vehiculosRouter;
