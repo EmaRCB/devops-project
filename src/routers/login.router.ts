@@ -5,7 +5,5 @@ import { ValidadorEsquemas } from "../util/midlewares/validador-esquemas";
 
 const loginRouter = express.Router();
 
-
-
-loginRouter.post('', ValidadorEsquemas(LoginDatos), Login);
+loginRouter.post("", ValidadorEsquemas(LoginDatos), Login);
 export default loginRouter;

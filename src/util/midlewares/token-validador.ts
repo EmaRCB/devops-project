@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ConflictoDatos, TokenError } from "../errores";
 import jwt from "../jwt";
+import { JsonWebTokenError } from "jsonwebtoken";
 
 type DecodedToken = {
   data: number;
@@ -23,6 +24,6 @@ export const TokenValidador = async (
 
     next();
   } catch (error) {
-    next(error);
+    next(new TokenError((error as JsonWebTokenError).name));
   }
 };
