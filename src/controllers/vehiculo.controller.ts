@@ -1,15 +1,16 @@
 import {VehiculoService} from "../services/vehiculo.service";
 import {idNotFound, valorDuplicado} from "../exceptions/vehiculo-excepciones";
 
-let vehiculoService:VehiculoService;
 export class vehiculoController {
+    constructor(private readonly vehiculoService: VehiculoService) {}
 
-    constructor() {
-        vehiculoService = new VehiculoService();
-    }
+    //Se llama al servicio una vez
+    //El parametro data al enviarse como respuesta contiene solamente la informacion que regreso la llamada al servicio
+    //Se tira un error si el servicio falla
+    //Cuando se llama al metodo json solamente se le envian 3 parametros
     async getVehiculos(req:any, res:any, next:any){
         try {
-            let vehiculos = await vehiculoService.getAll();
+            let vehiculos = await this.vehiculoService.getAll();
             res.status(200).json({status: 200, data: vehiculos, message: 'vehiculos encontrados'});
         }catch (error){
             next(error)
@@ -19,7 +20,7 @@ export class vehiculoController {
     async getVehiculo(req:any, res:any, next:any){
         try {
             let id = parseInt(req.params.id);
-            let vehiculo = await vehiculoService.getOne(id);
+            let vehiculo = await this.vehiculoService.getOne(id);
             if(vehiculo === null){
                 throw new idNotFound('El id no existe')
             }
@@ -32,15 +33,15 @@ export class vehiculoController {
     async createVehiculo(req:any, res:any, next:any){
         try {
             let fecha_compra = new Date().toISOString();
-            let placaExiste = await vehiculoService.findPlaca(req.body.placa);
+            let placaExiste = await this.vehiculoService.findPlaca(req.body.placa);
             if(placaExiste){
                 throw new valorDuplicado('La placa esta duplicada');
             }
-            let vinExiste = await vehiculoService.findVIN(req.body.VIN);
+            let vinExiste = await this.vehiculoService.findVIN(req.body.VIN);
             if(vinExiste){
                 throw new valorDuplicado('El VIN esta duplicado');
             }
-            let vehiculo = await vehiculoService.createVehiculo(req.body.placa, req.body.marca,
+            let vehiculo = await this.vehiculoService.createVehiculo(req.body.placa, req.body.marca,
                 req.body.modelo, req.body.VIN, fecha_compra, parseInt(req.body.costo), req.body.url_foto);
             res.status(200).json({status: 200, data: vehiculo, message: 'vehiculo creado'});
         }catch (error){
@@ -51,11 +52,11 @@ export class vehiculoController {
     async updateVehiculo(req:any, res:any, next:any){
         try {
             let id = parseInt(req.params.id);
-            let vehiculo = await vehiculoService.getOne(id);
+            let vehiculo = await this.vehiculoService.getOne(id);
             if(vehiculo === null){
                 throw new idNotFound('El id no existe')
             }
-            vehiculo = await vehiculoService.updateVehiculos(id, req.body.placa, req.body.marca,
+            vehiculo = await this.vehiculoService.updateVehiculos(id, req.body.placa, req.body.marca,
                 req.body.modelo, req.body.VIN, req.body.costo, req.body.url_foto);
             res.status(200).json({status: 200, data: vehiculo, message: 'vehiculo actualizado'});
         }catch (error){
@@ -66,11 +67,11 @@ export class vehiculoController {
     async deleteVehiculo(req:any, res:any, next:any){
         try {
             let id = parseInt(req.params.id);
-            let vehiculo = await vehiculoService.getOne(id);
+            let vehiculo = await this.vehiculoService.getOne(id);
             if(vehiculo === null){
                 throw new idNotFound('El id no existe')
             }
-            vehiculo = await vehiculoService.deleteVehiculo(id)
+            vehiculo = await this.vehiculoService.deleteVehiculo(id)
             res.status(200).json({status: 200, data: vehiculo, message: 'vehiculo eliminado'});
         }catch (error){
             next(error);

@@ -1,22 +1,14 @@
 import {PrismaClient} from '@prisma/client';
+import client from "../util/database_client";
 
-let prismaInstance: PrismaClient | null = null;
 export class VehiculoService {
 
-    private prisma: PrismaClient;
-    constructor() {
-        if (!prismaInstance) {
-            prismaInstance = new PrismaClient();
-        }
-        this.prisma = prismaInstance;
-    }
-
     async getAll(){
-        return this.prisma.vehiculos.findMany();
+        return client.vehiculos.findMany();
     }
 
     async getOne(id:number){
-        return this.prisma.vehiculos.findUnique({
+        return client.vehiculos.findUnique({
             where: {
                 id: id
             }
@@ -25,7 +17,7 @@ export class VehiculoService {
 
     async createVehiculo(placa: string, marca: string, modelo: string, VIN: string, fecha_compra: string, costo: number,
                          url_foto: string){
-        return await this.prisma.vehiculos.create({
+        return await client.vehiculos.create({
             data: {
                 placa: placa,
                 marca: marca,
@@ -40,7 +32,7 @@ export class VehiculoService {
 
     async updateVehiculos(id:number, placa: string, marca: string, modelo: string, VIN: string, costo: number,
                           url_foto: string){
-        return this.prisma.vehiculos.update({
+        return client.vehiculos.update({
             where: {
                 id: id,
             },
@@ -56,7 +48,7 @@ export class VehiculoService {
     }
 
     async deleteVehiculo(id:number){
-        return this.prisma.vehiculos.delete({
+        return client.vehiculos.delete({
             where:{
                 id:id
             }
@@ -64,7 +56,7 @@ export class VehiculoService {
     }
 
     async findPlaca(placa: string){
-        return this.prisma.vehiculos.findUnique({
+        return client.vehiculos.findUnique({
             where:{
                 placa:placa
             }
@@ -72,7 +64,7 @@ export class VehiculoService {
     }
 
     async findVIN(vin: string){
-        return this.prisma.vehiculos.findUnique({
+        return client.vehiculos.findUnique({
             where:{
                 VIN:vin
             }
