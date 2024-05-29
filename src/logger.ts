@@ -1,3 +1,4 @@
+import ecsFormat from "@elastic/ecs-winston-format";
 import winston, { format } from "winston";
 const { combine, timestamp, printf, colorize } = format;
 
@@ -23,7 +24,7 @@ export const logger = winston.createLogger({
     new winston.transports.Console({ format: ConsoleFormat }),
     new winston.transports.File({
       filename: "log/output.log",
-      format: OutputFormat,
+      format: ecsFormat({ convertReqRes: true }),
     }),
   ],
 });

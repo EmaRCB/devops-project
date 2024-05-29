@@ -18,6 +18,6 @@ export const LoggerMiddleware = (
       ? ` Body: ${JSON.stringify(req.body)}`
       : "";
 
-  logger.info(message);
+  logger.info('handled request', { req })
   next();
 };
