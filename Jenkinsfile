@@ -21,13 +21,5 @@ pipeline {
                 sh "docker ps -a -q --filter 'name=segunda-entrega-${BRANCH_NAME_CLEANED}' | xargs -r docker rm"
             }
         }
-        stage('Call Deploy') {
-            steps {
-                build job: 'Deploy Back', wait: true, parameters: [
-                    string(name: "BRANCH_NAME_CLEANED", value: "${BRANCH_NAME_CLEANED}"),
-                    string(name: "BUILD_NUMBER", value: "${BUILD_NUMBER}")
-                ]
-            }
-        }
     }
 }
