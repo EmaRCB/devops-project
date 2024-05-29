@@ -1,0 +1,14 @@
+model conductores {
+  id                     Int                      @id @default(autoincrement())
+  CURP                   String                   @unique @db.VarChar(70)
+  nombres                String                   @db.VarChar(300)
+  apellido_paterno       String                   @db.VarChar(300)
+  apellido_materno       String                   @db.VarChar(300)
+  fecha_nacimiento       DateTime                 @db.Date()
+  direccion              String                   @db.VarChar(400)
+  salario                Int
+  numero_licencia        Int                      @unique
+  fecha_registro         DateTime                 @default(now())
+  asignaciones           asignaciones[]
+  historial_asignaciones historial_asignaciones[]
+}

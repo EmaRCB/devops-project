@@ -26,6 +26,17 @@ export class ConflictoDatos extends ErrorPersonalizado implements Error {
   }
 }
 
+export class TokenError extends ErrorPersonalizado implements Error {
+  name: string = "Conflicto en el token";
+  message: string;
+  code: number = 401;
+
+  constructor(message: string) {
+    super();
+    this.message = message;
+  }
+}
+
 export class ServidorError extends ErrorPersonalizado implements Error {
   name: string = "Error en el proceso";
   message: string;

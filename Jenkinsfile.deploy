@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    
+    environment {
+        BRANCH_NAME_CLEANED = "${params.BRANCH_NAME_CLEANED}"
+        BUILD_NUMBER = "${params.BUILD_NUMBER}"
+    }
+    
+    stages {
+        stage('Deploying') {
+            steps {
+                sh "docker run -d --network=host -p 3301:3301 --name segunda-entrega-${BRANCH_NAME_CLEANED}-${BUILD_NUMBER} segunda-entrega-${BRANCH_NAME_CLEANED}:1.0.0-${BUILD_NUMBER}"
+                
+            }
+        }
+    }
+}

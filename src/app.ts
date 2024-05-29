@@ -1,17 +1,29 @@
 import Express from "express";
 import cors from "cors";
-import RutasVista from "./f_crud_rutas/vista/RutasVista";
-
+import rutasRouter from "./routers/rutas.router";
 import { ManejadorError } from "./util/midlewares/manejador-error";
-import { asisgnacionesRouter } from "./gestion_asignaciones/vista/rutas-asignaciones";
-import ConductorVista from "../src/f_crud_conductores_02/Vista/ConductorVista"; 
+import { asisgnacionesRouter } from "./routers/asignaciones.router";
+import ConductorVista from "./routers/conductor.router";
+import vehiculosRouter from "./routers/vehiculo.router";
+import { manejadorExcepcionesVehiculo } from "./util/midlewares/manejador-excepciones-vehiculo";
+import loginRouter from "./routers/login.router";
+import adminRouter from "./routers/admin.router";
+import registerRouter from "./routers/register.router";
+import { LoggerMiddleware } from "./util/midlewares/logger-middleware";
+
 export const app = Express();
-const adminRutas = require('./f_registro_administradores_04/vista/AdminRutas');
+
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
 app.use(cors());
-app.use('/rutas', RutasVista);
-app.use('/admin', adminRutas);
-app.use('/conductores', ConductorVista);
+
+app.use(LoggerMiddleware);
+app.use("/login", loginRouter);
+app.use("/register", registerRouter);
+app.use("/rutas", rutasRouter);
+app.use("/admin", adminRouter);
+app.use("/conductores", ConductorVista);
 app.use("/asignaciones", asisgnacionesRouter);
+app.use("/vehiculos", vehiculosRouter);
+app.use(manejadorExcepcionesVehiculo);
 app.use(ManejadorError);

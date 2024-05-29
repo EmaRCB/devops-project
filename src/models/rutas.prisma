@@ -1,0 +1,16 @@
+model rutas {
+  id                   Int      @id @default(autoincrement())
+  nombre_ruta          String   @db.VarChar(120)
+  long_empresa         String   @db.VarChar(200)
+  lat_empresa          String   @db.VarChar(200)
+  long_destino         String   @db.VarChar(200)
+  lat_destino          String   @db.VarChar(200)
+  fecha_recorrido      DateTime
+  fecha_creacion       DateTime @default(now())
+  exitoso              Boolean
+  descripcion_problema String   @db.Text()
+  comentarios          String   @db.Text()
+  id_asignacion        Int
+
+  asignacion asignaciones @relation(fields: [id_asignacion], references: [id])
+}

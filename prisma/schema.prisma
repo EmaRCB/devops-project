@@ -6,7 +6,6 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
 model administradores {
   id            Int    @id @default(autoincrement())
   correo        String @unique
@@ -15,28 +14,17 @@ model administradores {
 
   invitacion invitaciones @relation(fields: [id_invitacion], references: [id])
 }
+model asignaciones {
+  id           Int @id @default(autoincrement())
+  id_conductor Int
+  id_vehiculo  Int
 
-model invitaciones {
-  id                Int              @id @default(autoincrement())
-  codigo_invitacion String           @db.VarChar(100)
-  usado             Boolean          @default(false)
-  administradores   administradores?
+  activo Boolean @default(true)
+  rutas  rutas[]
+
+  conductor conductores @relation(fields: [id_conductor], references: [id])
+  vehiculo  vehiculos   @relation(fields: [id_vehiculo], references: [id])
 }
-
-model vehiculos {
-  id                     Int                      @id @default(autoincrement())
-  placa                  String                   @unique
-  marca                  String                   @db.VarChar(300)
-  modelo                 String                   @db.VarChar(300)
-  VIN                    String                   @unique @db.VarChar(300)
-  fecha_compra           DateTime                 @db.Date()
-  costo                  Int
-  url_foto               String                   @db.VarChar(300)
-  fecha_registro         DateTime                 @default(now())
-  asignaciones           asignaciones[]
-  historial_asignaciones historial_asignaciones[]
-}
-
 model conductores {
   id                     Int                      @id @default(autoincrement())
   CURP                   String                   @unique @db.VarChar(70)
@@ -51,19 +39,6 @@ model conductores {
   asignaciones           asignaciones[]
   historial_asignaciones historial_asignaciones[]
 }
-
-model asignaciones {
-  id           Int @id @default(autoincrement())
-  id_conductor Int
-  id_vehiculo  Int
-
-  activo Boolean @default(true)
-  rutas  rutas[]
-
-  conductor conductores @relation(fields: [id_conductor], references: [id])
-  vehiculo  vehiculos   @relation(fields: [id_vehiculo], references: [id])
-}
-
 model historial_asignaciones {
   id                 Int      @id @default(autoincrement())
   id_asignacion      Int
@@ -74,7 +49,12 @@ model historial_asignaciones {
   conductor conductores @relation(fields: [id_conductor], references: [id])
   vehiculo  vehiculos   @relation(fields: [id_vehiculo], references: [id])
 }
-
+model invitaciones {
+  id                Int              @id @default(autoincrement())
+  codigo_invitacion String           @db.VarChar(100)
+  usado             Boolean          @default(false)
+  administradores   administradores?
+}
 model rutas {
   id                   Int      @id @default(autoincrement())
   nombre_ruta          String   @db.VarChar(120)
@@ -90,4 +70,17 @@ model rutas {
   id_asignacion        Int
 
   asignacion asignaciones @relation(fields: [id_asignacion], references: [id])
+}
+model vehiculos {
+  id                     Int                      @id @default(autoincrement())
+  placa                  String                   @unique
+  marca                  String                   @db.VarChar(300)
+  modelo                 String                   @db.VarChar(300)
+  VIN                    String                   @unique @db.VarChar(300)
+  fecha_compra           DateTime                 @db.Date()
+  costo                  Int
+  url_foto               String                   @db.VarChar(300)
+  fecha_registro         DateTime                 @default(now())
+  asignaciones           asignaciones[]
+  historial_asignaciones historial_asignaciones[]
 }
