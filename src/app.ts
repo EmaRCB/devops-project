@@ -9,6 +9,7 @@ import { manejadorExcepcionesVehiculo } from "./util/midlewares/manejador-excepc
 import loginRouter from "./routers/login.router";
 import adminRouter from "./routers/admin.router";
 import registerRouter from "./routers/register.router";
+import { LoggerMiddleware } from "./util/midlewares/logger-middleware";
 
 export const app = Express();
 
@@ -16,6 +17,7 @@ app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
 app.use(cors());
 
+app.use(LoggerMiddleware);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/rutas", rutasRouter);
