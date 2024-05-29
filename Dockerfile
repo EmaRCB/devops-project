@@ -11,9 +11,6 @@ COPY . .
 # Instala las dependencias
 RUN npm install
 
-# Instala nodemon globalmente
-RUN npm install -g nodemon
-
 # Instala el CLI de Prisma globalmente
 RUN npm install -g prisma
 
